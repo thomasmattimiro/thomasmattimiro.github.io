@@ -1,0 +1,33 @@
+[
+  {
+    "id": "ultimate-player-db",
+    "title": "Ultimate Player Database",
+    "status": "In Development",
+    "description": "A PostgreSQL/PostGIS platform for tracking players, teams, tournaments, rosters, and geographic history.",
+    "technologies": [
+      "PostgreSQL",
+      "PostGIS",
+      "Supabase",
+      "Next.js"
+    ],
+    "businessValue": "Supports player analytics, recruiting analysis, and historical performance tracking.",
+    "schemaImage": "assets/diagrams/ultimate-player-erd.png",
+    "github": "https://github.com/yourrepo/player-db",
+    "featured": true
+  },
+
+  {
+    "id": "telecom-network-model",
+    "title": "Telecom Infrastructure Data Model",
+    "status": "Production",
+    "description": "GIS-based infrastructure model supporting fiber network engineering workflows.",
+    "technologies": [
+      "ArcGIS Enterprise",
+      "SQL Server",
+      "Python"
+    ],
+    "businessValue": "Improves design consistency and reporting accuracy.",
+    "schemaImage": "assets/diagrams/fiber-model.png",
+    "featured": true
+  }
+]

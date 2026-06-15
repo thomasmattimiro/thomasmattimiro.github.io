@@ -1,225 +1,237 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Databases</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Database Portfolio</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .filters button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .filters button.active {
+            background: #1f2937;
+            color: white;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            margin: 3px;
+            border-radius: 20px;
+            background: #e7f0ff;
+            font-size: 0.8rem;
+        }
+
+        .schema-thumb {
+            width: 100%;
+            max-height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+    </style>
 </head>
 
 <body>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="projects.html">Projects Map</a>
-    <a href="databases.html">Database Portfolio</a>
+<nav style="text-align:center; padding:1rem;">
+    <a href="index.html">Home</a> |
+    <a href="projects.html">Projects</a> |
+    <a href="database.html">Databases</a> |
     <a href="automation.html">Automation</a>
-    <a href="skills.html">Skills</a>
-    <a href="certifications.html">Training</a>
 </nav>
-# Database & Data Architecture Portfolio
 
-## Overview
+<header class="hero">
+    <h1>Database & Data Architecture</h1>
+    <p>
+        Designing scalable GIS, telecom, and analytics data systems.
+    </p>
+</header>
 
-Over the past eight years I have worked at the intersection of GIS, infrastructure, and enterprise data management. My experience includes designing data models, maintaining large geospatial datasets, building reporting workflows, automating data processes, and creating systems that support engineering and operational decision-making.
+<section class="section">
 
-This portfolio highlights database projects focused on scalability, data quality, automation, and business value.
+    <div class="filters" id="filters">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="PostgreSQL">PostgreSQL</button>
+        <button data-filter="PostGIS">PostGIS</button>
+        <button data-filter="GIS">GIS</button>
+        <button data-filter="Automation">Automation</button>
+        <button data-filter="Supabase">Supabase</button>
+    </div>
 
----
+    <div id="database-grid" class="card-grid"></div>
 
-## Core Skills
+</section>
 
-### Database Design
+<!-- Modal -->
+<div id="modal" class="modal" onclick="closeModal()">
+    <img id="modal-img" src="" />
+</div>
 
-* Relational database modeling
-* Entity Relationship (ER) design
-* Normalization and denormalization strategies
-* Data governance and data integrity
-* Schema development
+<script>
+let DATABASES = [];
 
-### SQL & Query Development
+async function loadDatabases() {
+    const res = await fetch('data/databases.json');
+    DATABASES = await res.json();
+    renderCards("all");
+}
 
-* PostgreSQL
-* PostGIS
-* Microsoft SQL Server
-* Query optimization
-* Stored procedures
-* Views and reporting datasets
+function renderCards(filter) {
 
-### Geospatial Databases
+    const container = document.getElementById('database-grid');
+    container.innerHTML = "";
 
-* ArcGIS Enterprise Geodatabases
-* ArcGIS Online Hosted Layers
-* Spatial indexing
-* Network datasets
-* Utility and telecom infrastructure modeling
+    DATABASES.forEach(db => {
 
-### Data Engineering
+        const match =
+            filter === "all" ||
+            (db.technologies &&
+             db.technologies.includes(filter));
 
-* ETL workflow development
-* Data validation and quality control
-* API integrations
-* Data migration projects
-* Automated reporting pipelines
+        if (!match) return;
 
----
+        const card = document.createElement('div');
+        card.className = 'card';
 
-# Featured Projects
+        const techTags = (db.technologies || [])
+            .map(t => `<span class="tech-tag">${t}</span>`)
+            .join('');
 
-## Ultimate Player Database
+        card.innerHTML = `
+            <h3>${db.title}</h3>
 
-### Objective
+            <p><strong>Status:</strong> ${db.status}</p>
 
-Design a scalable data platform capable of tracking players, teams, tournaments, game results, and player movement across geographic locations and time.
+            <p>${db.description}</p>
 
-### Technologies
+            <div>${techTags}</div>
 
-* PostgreSQL
-* PostGIS
-* Supabase
-* Next.js
-* TypeScript
+            ${
+                db.schemaImage
+                ? `<img class="schema-thumb"
+                     src="${db.schemaImage}"
+                     onclick="openModal('${db.schemaImage}')"
+                     alt="schema"/>`
+                : ''
+            }
 
-### Highlights
+            <p><strong>Business Value:</strong><br/>
+            ${db.businessValue}</p>
 
-* Designed a fully normalized relational schema
-* Implemented temporal player-location tracking
-* Created many-to-many relationships between players, teams, and events
-* Built geospatial components for mapping player distribution and team recruiting footprints
-* Structured data for future analytics and visualization
+            ${
+                db.github
+                ? `<a href="${db.github}"
+                     target="_blank">
+                     View Repository
+                   </a>`
+                : ''
+            }
+        `;
 
-### Key Tables
+        container.appendChild(card);
+    });
+}
 
-* Players
-* Teams
-* Events
-* Rosters
-* Player Event Appearances
-* Player Location History
-* Locations
+function openModal(src) {
+    document.getElementById('modal-img').src = src;
+    document.getElementById('modal').classList.add('open');
+}
 
-### Business Value
+function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+}
 
-Provides a foundation for advanced sports analytics, geographic recruiting analysis, and historical player tracking.
+document.getElementById('filters')
+    .addEventListener('click', (e) => {
 
----
+        if (e.target.tagName !== "BUTTON") return;
 
-## Telecom Infrastructure Data Management
+        document.querySelectorAll('.filters button')
+            .forEach(b => b.classList.remove('active'));
 
-### Objective
+        e.target.classList.add('active');
 
-Maintain and improve enterprise GIS databases supporting large-scale fiber network design and construction projects.
+        renderCards(e.target.dataset.filter);
+    });
 
-### Responsibilities
-
-* Data modeling
-* GIS database administration
-* Data quality assurance
-* Workflow standardization
-* Reporting support
-
-### Accomplishments
-
-* Managed datasets containing hundreds of thousands of service locations
-* Supported engineering teams through standardized database structures
-* Improved consistency between design, permitting, and construction datasets
-* Reduced manual data maintenance through automation workflows
-
-### Business Value
-
-Improved data reliability, reduced project risk, and enabled more accurate infrastructure planning.
-
----
-
-## Address Intelligence & Geocoding
-
-### Objective
-
-Develop repeatable workflows for validating and spatially locating large address datasets.
-
-### Highlights
-
-* Geocoded hundreds of thousands of addresses
-* Performed spatial quality assurance checks
-* Identified duplicate and invalid records
-* Created standardized address management processes
-
-### Business Value
-
-Improved accuracy for engineering design, serviceability analysis, and reporting.
-
----
-
-# Example Data Model
-
-Entity relationships commonly used in my projects:
-
-Players
-↕
-Player Event Appearances
-↕
-Events
-
-Players
-↕
-Player Location History
-↕
-Locations
-
-Teams
-↕
-Rosters
-↕
-Players
-
-This structure supports historical tracking, analytics, and geospatial visualization while maintaining data integrity.
-
----
-
-# Database Philosophy
-
-A database should do more than store information.
-
-Well-designed systems should:
-
-* Support business decisions
-* Scale with organizational growth
-* Minimize duplicate data
-* Preserve historical information
-* Enable automation
-* Improve data quality
-
-My focus is creating data architectures that are understandable, maintainable, and capable of supporting long-term operational success.
-
----
-
-# Tools & Technologies
-
-Databases
-
-* PostgreSQL
-* PostGIS
-* SQL Server
-* Supabase
-
-GIS Platforms
-
-* ArcGIS Enterprise
-* ArcGIS Online
-* ArcGIS Pro
-
-Development
-
-* SQL
-* TypeScript
-* Python
-* Next.js
-* GitHub
-
-Visualization
-
-* Domo
-* ArcGIS Dashboards
-
+loadDatabases();
+</script>
 
 </body>
-
-</div>
+</html>
