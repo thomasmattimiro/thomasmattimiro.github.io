@@ -121,5 +121,17 @@
         "ArcMap"
     ],
     "description": "Design of a greenfield fiber network for a local tier 2 ISP."
+  },
+  
+  {
+    "name": "Fiber Expansion",
+    "lat": 41.30,
+    "lng": -86.62,
+    "role": "OSP Engineer",
+    "location": "Knox, IN",
+    "technologies": [
+        "ArcGIS Pro"
+    ],
+    "description": "Design of a greenfield fiber network for a local tier 3 ISP."
   }
 ]
