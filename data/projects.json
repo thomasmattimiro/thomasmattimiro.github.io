@@ -25,5 +25,19 @@
     "lat": 43.50,
     "lng": -70.44,
     "description": "OSP Engineer"
+  },
+
+  {
+    "name": "Fiber Design and Permitting",
+    "lat": 42.47,
+    "lng": -83.22,
+    "description": "OSP Engineer"
+  },
+  
+  {
+    "name": "Fiber Over Build",
+    "lat": 43.55,
+    "lng": -87.96,
+    "description": "OSP Engineer"
   }
 ]
