@@ -3,41 +3,53 @@
     "name": "Fiber Expansion",
     "lat": 44.97,
     "lng": -93.26,
-    "description": "GIS Lead"
+    "role": "GIS Lead",
+    "location": "St. Paul, MN",
+    "description": "Lead team of OSP engineers and GIS analysts to design new fiber networks on behalf of a local tier two ISP."
   },
 
   {
-    "name": "Municipal Utility Mapping",
+    "name": "Line Extension",
     "lat": 46.78,
     "lng": -92.10,
-    "description": "Data Architecture"
+    "role": "OSP Engineer",
+    "location": "Duluth, MN",
+    "description": "Design of a line extension to provide service to a local hospital."
   },
 
   {
     "name": "Fiber Over Build",
     "lat": 43.96,
     "lng": -70.28,
-    "description": "OSP Engineer"
+    "role": "OSP Engineer",
+    "location": "New Gloucester, ME",
+    "description": "Lead team of OSP engineers and GIS analysts to design new fiber networks on behalf of a local tier two ISP."
   },
   
   {
     "name": "Fiber Over Build",
     "lat": 43.50,
     "lng": -70.44,
-    "description": "OSP Engineer"
+    "role": "GIS Lead",
+    "location": "Saco, ME",
+    "description": "Lead team of OSP engineers and GIS analysts to design new fiber networks on behalf of a local tier two ISP."
   },
 
   {
     "name": "Fiber Design and Permitting",
     "lat": 42.47,
     "lng": -83.22,
-    "description": "OSP Engineer"
+    "role": "GIS Lead",
+    "location": "Southfield, MI",
+    "description": "Design and permitting of middle mile fiber on behalf of local carrier."
   },
   
   {
     "name": "Fiber Over Build",
     "lat": 43.55,
     "lng": -87.96,
-    "description": "OSP Engineer"
+    "role": "GIS Lead",
+    "location": "Saco, ME",
+    "description": "Design of 10G Active Ethernet fiber network for a local ISP."
   }
 ]
