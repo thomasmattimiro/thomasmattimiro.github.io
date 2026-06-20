@@ -11,5 +11,19 @@
     "lat": 46.78,
     "lng": -92.10,
     "description": "Data Architecture"
+  },
+
+  {
+    "name": "Fiber Over Build",
+    "lat": 43.96,
+    "lng": -70.28,
+    "description": "OSP Engineer"
+  },
+  
+  {
+    "name": "Fiber Over Build",
+    "lat": 43.50,
+    "lng": -70.44,
+    "description": "OSP Engineer"
   }
 ]
