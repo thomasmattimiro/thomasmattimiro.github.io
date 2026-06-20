@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Projects | Thomas Mattimiro</title>
+
+```
+<link rel="stylesheet" href="css/style.css">
+
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<style>
+
+    #map {
+        height: 700px;
+        width: 100%;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    .loading {
+        margin-top: 20px;
+        font-style: italic;
+    }
+
+</style>
+```
+
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects Map</a>
+    <a href="databases.html">Database Portfolio</a>
+    <a href="automation.html">Automation & Tools</a>
+    <a href="skills.html">Skills Matrix</a>
+    <a href="certifications.html">Training & Certificates</a>
+</nav>
+
+<div class="container">
+
+```
+<h1>Engineering Projects</h1>
+
+<p>
+    Explore projects I've supported throughout my GIS,
+    telecom, utility infrastructure, and data leadership career.
+</p>
+
+<div id="map"></div>
+
+<div id="status" class="loading">
+    Loading projects...
+</div>
+```
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+const map = L.map('map').setView([44.9778, -93.2650], 5);
+
+L.tileLayer(
+    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+        attribution: '&copy; OpenStreetMap contributors'
+    }
+).addTo(map);
+
+async function loadProjects() {
+
+    try {
+
+        const response = await fetch('data/projects.json');
+
+        if (!response.ok) {
+            throw new Error('Unable to load projects.json');
+        }
+
+        const projects = await response.json();
+
+        const bounds = [];
+
+        projects.forEach(project => {
+
+            if (!project.lat || !project.lng) return;
+
+            const technologies = Array.isArray(project.technologies)
+                ? project.technologies.join(', ')
+                : project.technologies || '';
+
+            const popup = `
+                <div style="min-width:250px;">
+                    <h3>${project.name || ''}</h3>
+
+                    <strong>Location:</strong><br>
+                    ${project.location || ''}<br><br>
+
+                    <strong>Role:</strong><br>
+                    ${project.role || ''}<br><br>
+
+                    <strong>Description:</strong><br>
+                    ${project.description || ''}<br><br>
+
+                    <strong>Technologies:</strong><br>
+                    ${technologies}
+                </div>
+            `;
+
+            L.marker([project.lat, project.lng])
+                .addTo(map)
+                .bindPopup(popup);
+
+            bounds.push([project.lat, project.lng]);
+
+        });
+
+        if (bounds.length > 0) {
+            map.fitBounds(bounds, {
+                padding: [50, 50]
+            });
+        }
+
+        document.getElementById('status').innerHTML =
+            `${projects.length} projects loaded`;
+
+    }
+    catch(error) {
+
+        console.error(error);
+
+        document.getElementById('status').innerHTML =
+            'Error loading project data';
+
+    }
+}
+
+loadProjects();
+
+</script>
+
+</body>
+</html>

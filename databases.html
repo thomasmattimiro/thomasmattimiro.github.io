@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Database Portfolio</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .filters button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .filters button.active {
+            background: #1f2937;
+            color: white;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            margin: 3px;
+            border-radius: 20px;
+            background: #e7f0ff;
+            font-size: 0.8rem;
+        }
+
+        .schema-thumb {
+            width: 100%;
+            max-height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<nav style="text-align:center; padding:1rem;">
+    <a href="index.html">Home</a> |
+    <a href="projects.html">Projects</a> |
+    <a href="databases.html">Databases</a> |
+    <a href="automation.html">Automation</a>
+</nav>
+
+<header class="hero">
+    <h1>Database & Data Architecture</h1>
+    <p>
+        Designing scalable GIS, telecom, and analytics data systems.
+    </p>
+</header>
+
+<section class="section">
+
+    <div class="filters" id="filters">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="PostgreSQL">PostgreSQL</button>
+        <button data-filter="PostGIS">PostGIS</button>
+        <button data-filter="GIS">GIS</button>
+        <button data-filter="Automation">Automation</button>
+        <button data-filter="Supabase">Supabase</button>
+    </div>
+
+    <div id="database-grid" class="card-grid"></div>
+
+</section>
+
+<!-- Modal -->
+<div id="modal" class="modal" onclick="closeModal()">
+    <img id="modal-img" src="" />
+</div>
+
+<script>
+let DATABASES = [];
+
+async function loadDatabases() {
+    const res = await fetch('data/databases.json');
+    DATABASES = await res.json();
+    renderCards("all");
+}
+
+function renderCards(filter) {
+
+    const container = document.getElementById('database-grid');
+    container.innerHTML = "";
+
+    DATABASES.forEach(db => {
+
+        const match =
+            filter === "all" ||
+            (db.technologies &&
+             db.technologies.includes(filter));
+
+        if (!match) return;
+
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const techTags = (db.technologies || [])
+            .map(t => `<span class="tech-tag">${t}</span>`)
+            .join('');
+
+        card.innerHTML = `
+            <h3>${db.title}</h3>
+
+            <p><strong>Status:</strong> ${db.status}</p>
+
+            <p>${db.description}</p>
+
+            <div>${techTags}</div>
+
+            ${
+                db.schemaImage
+                ? `<img class="schema-thumb"
+                     src="${db.schemaImage}"
+                     onclick="openModal('${db.schemaImage}')"
+                     alt="schema"/>`
+                : ''
+            }
+
+            <p><strong>Business Value:</strong><br/>
+            ${db.businessValue}</p>
+
+            ${
+                db.github
+                ? `<a href="${db.github}"
+                     target="_blank">
+                     View Repository
+                   </a>`
+                : ''
+            }
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+function openModal(src) {
+    document.getElementById('modal-img').src = src;
+    document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+}
+
+document.getElementById('filters')
+    .addEventListener('click', (e) => {
+
+        if (e.target.tagName !== "BUTTON") return;
+
+        document.querySelectorAll('.filters button')
+            .forEach(b => b.classList.remove('active'));
+
+        e.target.classList.add('active');
+
+        renderCards(e.target.dataset.filter);
+    });
+
+loadDatabases();
+</script>
+
+</body>
+</html>
