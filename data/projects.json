@@ -83,5 +83,17 @@
         "Hexatronics"
     ],
     "description": "Design of fiber network using Hexatronic microduct systems"
+  },
+  
+  {
+    "name": "Schema Design",
+    "lat": 40.015,
+    "lng": -105.27,
+    "role": "GIS Lead",
+    "location": "Boulder, CO",
+    "technologies": [
+        "ArcGIS Pro"
+    ],
+    "description": "Design of the base GIS schema for a nation-wide construction and engineering firm."
   }
 ]
