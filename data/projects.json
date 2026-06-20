@@ -95,5 +95,31 @@
         "ArcGIS Pro"
     ],
     "description": "Design of the base GIS schema for a nation-wide construction and engineering firm."
+  },
+  
+  {
+    "name": "Fiber Expansion",
+    "lat": 44.96,
+    "lng": -89.63,
+    "role": "OSP Engineer",
+    "location": "Wausau, WI",
+    "technologies": [
+        "ArcGIS Pro",
+        "ArcMap"
+    ],
+    "description": "Design of a greenfield fiber network for a local tier 2 ISP."
+  },
+  
+  {
+    "name": "Fiber Expansion",
+    "lat": 43.06,
+    "lng": -89.33,
+    "role": "OSP Engineer",
+    "location": "Monona, WI",
+    "technologies": [
+        "ArcGIS Pro",
+        "ArcMap"
+    ],
+    "description": "Design of a greenfield fiber network for a local tier 2 ISP."
   }
 ]
