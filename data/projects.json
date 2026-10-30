@@ -3,27 +3,135 @@
     "name": "Fiber Expansion",
     "lat": 44.97,
     "lng": -93.26,
-    "description": "GIS Lead"
+    "role": "GIS Lead",
+    "location": "St. Paul, MN",
+    "technologies": [
+        "ArcGIS Pro"
+    ],
+    "description": "Lead team of OSP engineers and GIS analysts to design new fiber networks on behalf of a local tier two ISP."
   },
 
   {
-    "name": "Municipal Utility Mapping",
+    "name": "Line Extension",
     "lat": 46.78,
     "lng": -92.10,
-    "description": "Data Architecture"
+    "role": "OSP Engineer",
+    "location": "Duluth, MN",
+    "technologies": [
+        "ArcGIS Pro"
+    ],
+    "description": "Design of a line extension to provide service to a local hospital."
   },
 
   {
     "name": "Fiber Over Build",
     "lat": 43.96,
     "lng": -70.28,
-    "description": "OSP Engineer"
+    "role": "OSP Engineer",
+    "location": "New Gloucester, ME",
+    "technologies": [
+        "ArcGIS Pro"
+    ],
+    "description": "Lead team of OSP engineers and GIS analysts to design new fiber networks on behalf of a local tier two ISP."
   },
   
   {
     "name": "Fiber Over Build",
     "lat": 43.50,
     "lng": -70.44,
-    "description": "OSP Engineer"
+    "role": "GIS Lead",
+    "location": "Saco, ME",
+    "technologies": [
+        "ArcGIS Pro"
+    ],
+    "description": "Lead team of OSP engineers and GIS analysts to design new fiber networks on behalf of a local tier two ISP."
+  },
+
+  {
+    "name": "Fiber Design and Permitting",
+    "lat": 42.47,
+    "lng": -83.22,
+    "role": "GIS Lead",
+    "location": "Southfield, MI",
+    "technologies": [
+        "ArcGIS Pro"
+    ],
+    "description": "Design and permitting of middle mile fiber on behalf of a local carrier."
+  },
+  
+  {
+    "name": "Fiber Over Build",
+    "lat": 43.55,
+    "lng": -87.96,
+    "role": "GIS Lead",
+    "location": "Random Lake, WI",
+    "technologies": [
+        "ArcGIS Pro"
+    ],
+    "description": "Design of 10G Active Ethernet fiber network for a local ISP."
+  },
+  
+  {
+    "name": "Fiber Over Build",
+    "lat": 25.76,
+    "lng": -80.19,
+    "role": "GIS Lead",
+    "location": "Miami, FL",
+    "technologies": [
+        "ArcGIS Pro",
+        "ArcGIS Enterprise",
+        "Hexatronics"
+    ],
+    "description": "Design of fiber network using Hexatronic microduct systems"
+  },
+  
+  {
+    "name": "Schema Design",
+    "lat": 40.015,
+    "lng": -105.27,
+    "role": "GIS Lead",
+    "location": "Boulder, CO",
+    "technologies": [
+        "ArcGIS Pro"
+    ],
+    "description": "Design of the base GIS schema for a nation-wide construction and engineering firm."
+  },
+  
+  {
+    "name": "Fiber Expansion",
+    "lat": 44.96,
+    "lng": -89.63,
+    "role": "OSP Engineer",
+    "location": "Wausau, WI",
+    "technologies": [
+        "ArcGIS Pro",
+        "ArcMap"
+    ],
+    "description": "Design of a greenfield fiber network for a local tier 2 ISP."
+  },
+  
+  {
+    "name": "Fiber Expansion",
+    "lat": 43.06,
+    "lng": -89.33,
+    "role": "OSP Engineer",
+    "location": "Monona, WI",
+    "technologies": [
+        "ArcGIS Pro",
+        "ArcMap"
+    ],
+    "description": "Design of a greenfield fiber network for a local tier 2 ISP."
+  },
+  
+  {
+    "name": "Fiber Expansion",
+    "lat": 41.30,
+    "lng": -86.62,
+    "role": "OSP Engineer",
+    "location": "Knox, IN",
+    "technologies": [
+        "ArcGIS Pro"
+    ],
+    "description": "Design of a greenfield fiber network for a local tier 3 ISP."
   }
 ]
